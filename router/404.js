@@ -2,7 +2,7 @@
 
 // 404 页面返回信息
 
-const log = require('../debug/log').log;
+const log = require('../standar_module/debug/log').log;
 
 
 module.exports = () => {

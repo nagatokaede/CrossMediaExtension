@@ -1,12 +1,11 @@
 'use strict'
 
-let faceInfo = require('../../setting').faceInfo;
-const log = require('../../debug/log').log;
-const strToJson = require('../../tools/typeConversion').strToJson;
+const faceInfo = require('../../../setting').faceInfo;
+const log = require('../../../debug/log').log;
+const strToJson = require('../../../tools/typeConversion').strToJson;
 
 const querystring = require('querystring')
 const https = require('https');
-
 
 let reqMergeFaceAPI = (template_url, template_rectangle, merge_url, merge_rectangle) => {
     // 设置 face++ 接口用户信息

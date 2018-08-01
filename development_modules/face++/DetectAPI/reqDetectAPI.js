@@ -1,13 +1,11 @@
 'use strict'
 
-let faceInfo = require('../../setting').faceInfo;
-const log = require('../../debug/log').log;
-const strToJson = require('../../tools/typeConversion').strToJson;
+const faceInfo = require('../../../setting').faceInfo;
+const log = require('../../../debug/log').log;
+const strToJson = require('../../../tools/typeConversion').strToJson;
 
 const querystring = require('querystring');
 const https = require('https');
-const fs = require('fs');
-
 
 let reqDetectAPI = (path) => {
     return new Promise((resolve, reject) => {
