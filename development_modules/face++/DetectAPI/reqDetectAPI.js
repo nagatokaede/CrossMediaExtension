@@ -47,15 +47,15 @@ let reqDetectAPI = (path) => {
                 let dataObj = strToJson(data);
                 
                 if (dataObj.error_message) {
-                    log(0, `人脸识别请求发生错误！`);
-                    resolve(dataObj);
+                    log(0, `人脸识别请求发生错误！${dataObj.error_message}`);
+                    resolve(false);
                     
                 } else if (!dataObj.faces[0]) {
                     log(1, `上传图像中未能找到人脸信息!`);
-                    resolve(false);
+                    resolve(undefined);
                     
                 } else { // 成功请求并返回人脸信息
-                    resolve(dataObj.faces[0]);
+                    resolve(dataObj.faces);
                 }
                 
             });

@@ -3,7 +3,9 @@
 const Router = require('koa-router');
 
 // 上传文件
-const upload = require('../import/upfile').upload;
+const upload = require('../standar_modules/multer/upfile');
+// 连接文件
+const splicer = require('../tools/splicer');
 
 const log = require('../debug/log').log;
 let logPath = (ctx, method) => {
