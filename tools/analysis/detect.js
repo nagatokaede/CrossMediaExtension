@@ -15,8 +15,10 @@ let detect = async file => {
     let data = await reqDetectAPI(file.web_url);
     if (!data) {
         if (data === undefined) {
+            ctx.status = 400
             return ERRORMSG.FACEERROR.message
         } else {
+            ctx.status = 500
             return ERRORMSG.SYSTEMERROR.message
         }
     }

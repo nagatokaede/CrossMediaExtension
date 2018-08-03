@@ -45,7 +45,7 @@ let reqBeautifyAPI = (path, url) => {
 
             res.on('end', () => {
                 log(4, '\n响应中已无数据。');
-                // 仅返回人脸框数据
+                // 返回美颜后数据
                 let dataObj = strToJson(data);
                 
                 if (dataObj.error_message) {

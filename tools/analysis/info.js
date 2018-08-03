@@ -13,33 +13,45 @@ const find = require('../../standar_modules/database/tools/Find').infoFindOne;
 const remove = require('../../standar_modules/database/tools/Remove').infoRemove;
 
 
-let createInfo = async (ctx, data, faceRectangle) => {
-    userId = ctx.req.body.userId;
+let createInfo = async (ctx, data, faceRectangle = false) => {
+    let userId = ctx.req.body.userId;
+    if (faceRectangle) {
+        let face_rectangle = faceRectangle[0].face_rectangle
+    }
 
-    let Data = await create(data, userId, faceRectangle[0].face_rectangle);
+    let Data = await create(data, userId, face_rectangle);
     if (!Data) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 
     return Data
 }
 
-let findInfo = async ctx => {
-    userId = ctx.req.body.userId;
+let findInfo = async (ctx, flag = true) => {
+    let id;
+    if (flag) {
+        id = ctx.req.body.templateId;        
+    } else {
+        id = ctx.req.body.userId
+    }
 
-    let data = await find(userId);
-    if (!data) {
+
+    let Data = await find(id);
+    if (!Data) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 
-    return data
+    return Data
 }
 
 let removeInfo = async ctx => {
-    userId = ctx.req.body.userId;
+    let userId = ctx.req.body.userId;
 
     let flag = await remove(userId);
     if (!flag) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 

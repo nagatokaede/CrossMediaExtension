@@ -19,6 +19,7 @@ let createUser = async ctx => {
 
     let flag = await create(userId);
     if (!flag) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 
@@ -34,6 +35,7 @@ let findUser = async ctx => {
         if (data === undefined) {
             return ''
         } else {
+            ctx.status = 500
             return ERRORMSG.SYSTEMERROR.message
         }
     }
@@ -46,6 +48,7 @@ let updateUser = async ctx => {
 
     let flag = await update(userId);
     if (!flag) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 
@@ -57,6 +60,7 @@ let removeUser = async ctx => {
 
     let flag = await remove(userId);
     if (!flag) {
+        ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
     }
 
