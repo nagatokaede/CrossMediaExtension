@@ -10,7 +10,90 @@
 
 开发日志：
 
-date：2018-8-1
+date：2018-8-3
 V：CrossMediaExtension V0.1
 content: 
+1. 修改了文件结构关系
+
+└─CrossMediaExtension
+    │  index.js // 启动文件
+    │  log.txt
+    │  package.json
+    │  README.md
+    │  setting.js // 全局设置
+    │
+    ├─debug
+    │      ERRORMSG.js // 错误响应
+    │      log.js // debug
+    │      log.txt
+    │
+    ├─development_modules // 开发模块
+    │  │  log.txt
+    │  │
+    │  └─face++ // 基于 face++ API 的开发模块
+    │      │  log.txt
+    │      │
+    │      ├─BeautifyAPI // 美颜
+    │      │      reqBeautifyAPI.js
+    │      │
+    │      ├─DetectAPI // 人脸识别
+    │      │      reqDetectAPI.js
+    │      │
+    │      └─mergeFaceAPI // 人脸融合
+    │              reqMergeFaceAPI.js
+    │
+    ├─router  // 路由
+    │      404.js // 规定路由以外的路径响应 404 中间件 
+    │      log.txt
+    │      route.js
+    │
+    ├─server // koa 服务
+    │      log.txt
+    │      server.js
+    │
+    ├─standar_modules // node 基本开发模块
+    │  │  log.txt
+    │  │
+    │  ├─database // 数据库 mongodb
+    │  │  │  conn_mongo.js // 连接 mongodb
+    │  │  │  log.txt
+    │  │  │
+    │  │  ├─modules // 数据库模板
+    │  │  │      InfoModel.js
+    │  │  │      UserModel.js
+    │  │  │
+    │  │  └─tools // 数据库操作工具，增、删、改、查
+    │  │          Find.js
+    │  │          Insert.js
+    │  │          Remove.js
+    │  │          Update.js
+    │  │
+    │  ├─fs // node 文件管理
+    │  │      create.js
+    │  │      log.txt
+    │  │
+    │  └─multer // 处理上传文件模块
+    │          log.txt
+    │          upfile.js
+    │
+    ├─static // 静态文件件
+    │      log.txt
+    │
+    ├─tools // 项目工具
+    │  │  log.txt
+    │  │  splicer.js // 连接数据处理和路由中间项
+    │  │  typeConversion.js
+    │  │
+    │  └─analysis // 数据处理并调用模块和处理模块返回数据
+    │          beautify.js
+    │          detect.js
+    │          exist.js
+    │          info.js
+    │          log.txt
+    │          mergeFace.js
+    │          user.js
+    │          writeFile.js
+    │
+    └─upfiles // 用户上传文件文件夹
+            log.txt
 
