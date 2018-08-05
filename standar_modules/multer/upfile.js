@@ -24,7 +24,7 @@ let storage = multer.diskStorage({
     // 文件保存路径
     destination: (ctx, file, cb) => {
         dir(ctx.body, `文件上传时的请求 body `);
-        cb(null, createFiles(ctx.req.body.userId));
+        cb(null, createFiles(ctx.req.body.userId).local_path);
     },
     // 修改文件名称
     filename: (ctx, file, cb) => {

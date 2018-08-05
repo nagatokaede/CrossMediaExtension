@@ -25,7 +25,7 @@ let createFiles =  (userId, type = 'images') => { // 创建文件夹
     let user = userId;
     let date = new Date();
     let dirName = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    let rootName = `faceNode\\static\\${user}\\${type}\\`;
+    let rootName = `CrossMediaExtension\\upfiles\\${user}\\${type}\\`;
     
     log(3, "创建文件夹");
     mkdirs(`${rootName}${dirName}\\`);
@@ -33,7 +33,7 @@ let createFiles =  (userId, type = 'images') => { // 创建文件夹
 
     return {
             "local_path": `${rootName}${dirName}\\`, 
-            "web_path": `http://${server.hostname}/${server.host}/${user}/${type}/`
+            "web_path": `http://${server.hostname}/${server.host}/${user}/${type}/${dirName}/`
         } 
 }
 

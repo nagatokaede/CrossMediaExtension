@@ -9,6 +9,7 @@ const info = require('./analysis/info');
 const user = require('./analysis/user');
 const writeFile = require('./analysis/writeFile');
 const exist = require('./analysis/exist');
+const multerData = require('./analysis/multerData');
 
 // ------------- 美颜 --------------
 
@@ -78,9 +79,13 @@ let upfileBase64 = async (ctx) => {
  * beautify: beautify switch
  */
 let detectFun = async (ctx) => {
-    // 存储上传图像
-    let file = await writeFile.upfile(ctx);
-    if (file.message) { return file }
+    // 存储上传 base64 图像
+    if (ctx.req.body.beautify) {
+        let file = await writeFile.upfile(ctx);
+        if (file.message) { return file }
+    } else {
+        let file = multerData(ctx);
+    }
 
     // 创建用户
     let userMsg = await user.createUser(ctx);
