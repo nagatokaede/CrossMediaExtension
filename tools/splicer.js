@@ -15,11 +15,11 @@ const multerData = require('./analysis/multerData');
 
 let beautifyFun = async (file) => {
     // 图像美颜
-    let data = await beautify(file);
+    let data = await beautify(ctx, file);
     if (data.message) { return data }
 
     // 覆盖图像
-    return await writeFile.coverage(path, data);
+    return await writeFile.coverage(file, data);
 }
 
 // ------------- 融合 ----------------
@@ -29,18 +29,18 @@ let mergeFun = async (ctx, userInfoMsg, flag) => {
     let templateMsg = await info.findInfo(ctx);
     if (templateMsg.message) { return templateMsg } 
 
-    // 判断文件是否已存在
+    // 判断此次融合请求是否是之前请求过的：更换模板
     if (flag) {
         let existMsg = exist(userInfoMsg, ctx);
         if (existMsg) { return existMsg }
     }
 
     // 人脸融合
-    let mergeMsg = await mergeFace(userInfoMsg, templateMsg);
+    let mergeMsg = await mergeFace(ctx, userInfoMsg, templateMsg);
     if (mergeMsg.message) { return mergeMsg }
 
     // 存储图像
-    return await writeFile.saveMergeFile(mergeMsg, userInfoMsg, templateMsg);
+    return await writeFile.saveMergeFile(mergeMsg, userInfoMsg, ctx);
 }
 
 /* ------------- 上传 base64 数据保存 --------------
@@ -80,11 +80,12 @@ let upfileBase64 = async (ctx) => {
  */
 let detectFun = async (ctx) => {
     // 存储上传 base64 图像
+    let file;
     if (ctx.req.body.beautify) {
-        let file = await writeFile.upfile(ctx);
+        file = await writeFile.upfile(ctx);
         if (file.message) { return file }
     } else {
-        let file = multerData(ctx);
+        file = multerData(ctx);
     }
 
     // 创建用户
@@ -92,7 +93,7 @@ let detectFun = async (ctx) => {
     if (userMsg.message) { return userMsg }
 
     // 人脸识别
-    let faceRectangle = await detect(file);
+    let faceRectangle = await detect(ctx, file);
     if (faceRectangle.message) { return faceRectangle }
 
     // 美颜

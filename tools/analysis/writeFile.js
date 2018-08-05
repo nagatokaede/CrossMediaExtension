@@ -40,7 +40,7 @@ let upfile = async ctx => { // 存储上传图像
 
 
 let coverage = async (file, data) => { // 美颜图像覆盖
-    let File = await create.createFile(file.path, data.result);
+    let File = await create.createFile(file.path + file.filename, data.result);
     if (!File) {
         ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
@@ -51,6 +51,10 @@ let coverage = async (file, data) => { // 美颜图像覆盖
 
 
 let saveMergeFile = async (mergeMsg, detectMsg, ctx) => { // 存储人脸融合图像
+    // mergeMsg: 调用融合 API 返回的数据，主要用到融合图像 base64 数据
+    // detectMsg： 用户上传的自己的图像存储后返回的文件路径信息
+    // ctx: 这里主要用到 templateId 来固定融合后图像的名称
+    
     let templateId = ctx.req.body.templateId
     let fileName = detectMsg.upFileInfo.fileName
 

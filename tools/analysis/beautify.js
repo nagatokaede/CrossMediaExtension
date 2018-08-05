@@ -11,7 +11,7 @@ const ERRORMSG = require('../../debug/ERRORMSG');
 
 const reqBeautifyAPI = require('../../development_modules/face++/BeautifyAPI/reqBeautifyAPI');
 
-let detect = async file => {
+let detect = async (ctx, file) => {
     let data = await reqBeautifyAPI(file.web_url);
     if (!data) {
         ctx.status = 500

@@ -15,7 +15,7 @@ const remove = require('../../standar_modules/database/tools/Remove').userRemove
 
 
 let createUser = async ctx => {
-    userId = ctx.req.body.userId;
+    let userId = ctx.req.body.userId;
 
     let flag = await create(userId);
     if (!flag) {
@@ -27,7 +27,7 @@ let createUser = async ctx => {
 }
 
 let findUser = async ctx => {
-    userId = ctx.req.body.userId;
+    let userId = ctx.req.body.userId;
 
     let data = await find(userId);
 
@@ -44,7 +44,7 @@ let findUser = async ctx => {
 }
 
 let updateUser = async ctx => {
-    userId = ctx.req.body.userId;
+    let userId = ctx.req.body.userId;
 
     let flag = await update(userId);
     if (!flag) {
@@ -56,7 +56,7 @@ let updateUser = async ctx => {
 }
 
 let removeUser = async ctx => {
-    userId = ctx.req.body.userId;
+    let userId = ctx.req.body.userId;
 
     let flag = await remove(userId);
     if (!flag) {

@@ -3,6 +3,7 @@
 const log = require('../../../debug/log').log;
 
 const UserModel = require('../modules/UserModel');
+const userFindOne = require('./Find').userFindOne;
 
 // 插入数据
 let infoCreate = async (data, userId, faceRectangle) => {
@@ -35,9 +36,14 @@ let infoCreate = async (data, userId, faceRectangle) => {
 } 
 
 // 插入用户
-let userCreate = userId => {
-    log(4, `创建用户 userId：${userId}`); 
+let userCreate = async userId => {
+    let userFind = await userFindOne(userId);
+    if (userFind) { 
+        log(4, `用户已存在 userId：${userId}`);
+        return userFind 
+    }
 
+    log(4, `创建用户 userId：${userId}`); 
     return new Promise(resolve => { // 插入用户  
         let createUser = new UserModel({ 
             userId: userId

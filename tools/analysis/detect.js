@@ -11,7 +11,8 @@ const ERRORMSG = require('../../debug/ERRORMSG');
 
 const reqDetectAPI = require('../../development_modules/face++/DetectAPI/reqDetectAPI');
 
-let detect = async file => {
+let detect = async (ctx, file) => {
+    log(4, `存储图像路径，请求人脸识别\n${file}`)
     let data = await reqDetectAPI(file.web_url);
     if (!data) {
         if (data === undefined) {

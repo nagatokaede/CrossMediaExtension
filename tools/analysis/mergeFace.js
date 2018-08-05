@@ -18,7 +18,7 @@ let faceRectangleFun = fr => {
     return faceRectangle
 }
 
-let detect = async (detectMsg, templateMsg) => {
+let detect = async (ctx, detectMsg, templateMsg) => {
     dir(detectMsg, '用户上传图像的信息');
     dir(templateMsg, '模板图像的信息');
 

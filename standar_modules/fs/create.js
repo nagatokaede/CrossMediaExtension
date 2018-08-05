@@ -12,7 +12,7 @@ let mkdirs = dirname => {
         return true
 
     } else { // 文件夹不存在
-        if ( mkdies(path.dirname(dirname)) ) { // 回调递归
+        if ( mkdirs(path.dirname(dirname)) ) { // 回调递归
             fs.mkdirSync(dirname);
             return true
         }

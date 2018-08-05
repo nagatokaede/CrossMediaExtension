@@ -4,6 +4,7 @@ const fs = require('fs');
 
 // 判断文件是否已存在
 let exist = (userInfoMsg, ctx) => { 
+    // userInfoMsg: 用户之前上传的图像所存储的信息
     dir(userInfoMsg, `判断文件是否已存在 userInfoMsg`);
     
     let fileName = userInfoMsg.upFileInfo.fileName
