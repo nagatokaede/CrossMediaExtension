@@ -61,5 +61,4 @@ let removeInfo = async ctx => {
 
 exports.createInfo = createInfo
 exports.findInfo = findInfo
-exports.updateInfo = updateInfo
 exports.removeInfo = removeInfo

@@ -9,7 +9,7 @@ const log = require('../../debug/log').log;
 
 const ERRORMSG = require('../../debug/ERRORMSG');
 
-const reqBeautifyAPI = require('../../development_modules/BeautifyAPI/reqBeautifyAPI');
+const reqBeautifyAPI = require('../../development_modules/face++/BeautifyAPI/reqBeautifyAPI');
 
 let detect = async file => {
     let data = await reqBeautifyAPI(file.web_url);

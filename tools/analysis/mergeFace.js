@@ -10,7 +10,7 @@ const dir = require('../../debug/log').dir;
 
 const ERRORMSG = require('../../debug/ERRORMSG');
 
-const reqMergeFaceAPI = require('../../development_modules/MergeFaceAPI/reqMergeFaceAPI');
+const reqMergeFaceAPI = require('../../development_modules/face++/MergeFaceAPI/reqMergeFaceAPI');
 
 let faceRectangleFun = fr => {
     // 处理数据中的人脸框信息

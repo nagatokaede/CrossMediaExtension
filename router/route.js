@@ -33,7 +33,7 @@ test.post('/', async ctx => {
 const upfile = new Router();
 
 // 上传 base64 文件接口
-mergeface.post('/base64', async ctx => {
+upfile.post('/base64', async ctx => {
     ctx.body = await upload(ctx, async err => {
         return await splicer.upfileBase64(ctx);
     });

@@ -5,7 +5,7 @@
 module.exports = {
     // node 服务信息
     server: {
-         hostname: '10.0.0.156', 
+         hostname: '192.168.1.3', 
          post: '2233'
     },
     // face++ API 接口信息

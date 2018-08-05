@@ -1,6 +1,6 @@
 'use strict'
 
-const log = require('../debug/log').log;
+const log = require('../../debug/log').log;
 
 const mongoose = require('mongoose');
 

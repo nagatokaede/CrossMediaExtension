@@ -1,8 +1,8 @@
 'use strict'
 
-const server = require('../../../setting').server;
+const server = require('../../setting').server;
 
-const log = require('../../../debug/log').log;
+const log = require('../../debug/log').log;
 
 const fs = require('fs');
 const path = require('path');

@@ -1,6 +1,6 @@
 'use strict'
 
-const log = require('../standar_modules/debug/log').log;
+const log = require('../debug/log').log;
 const setting = require('../setting').server;
 
 const koa = require('koa');
@@ -10,7 +10,7 @@ const bodyParser = require('koa-bodyparser');
 const cors = require('koa-cors');
 
 
-const router = require('../router/router');
+const router = require('../router/route');
 const page404 = require('../router/404');
 
 const app = new koa();

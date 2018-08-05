@@ -9,7 +9,7 @@ const log = require('../../debug/log').log;
 
 const ERRORMSG = require('../../debug/ERRORMSG');
 
-const reqDetectAPI = require('../../development_modules/DetectAPI/reqDetectAPI');
+const reqDetectAPI = require('../../development_modules/face++/DetectAPI/reqDetectAPI');
 
 let detect = async file => {
     let data = await reqDetectAPI(file.web_url);

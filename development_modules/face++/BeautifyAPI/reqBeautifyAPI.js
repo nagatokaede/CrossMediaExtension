@@ -72,4 +72,4 @@ let reqBeautifyAPI = (path, url) => {
     });
 }
 
-module.exports = reqDetectAPI
+module.exports = reqBeautifyAPI
