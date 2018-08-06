@@ -7,7 +7,7 @@ const strToJson = require('../../../tools/typeConversion').strToJson;
 const querystring = require('querystring');
 const https = require('https');
 
-let reqBeautifyAPI = (path, url) => {
+let reqBeautifyAPI = (image_url) => {
     return new Promise(resolve => {
         // 设置 face++ 接口用户信息
         let faceInfoObj = new Object;
@@ -15,7 +15,7 @@ let reqBeautifyAPI = (path, url) => {
         faceInfoObj.api_secret = faceInfo.api_secret;
         faceInfoObj.whitening = faceInfo.whitening;
         faceInfoObj.smoothing = faceInfo.smoothing;
-        faceInfoObj.image_url = url
+        faceInfoObj.image_url = image_url
 
         // 拼接 face++ API 接口信息
         let postData = querystring.stringify(faceInfoObj);

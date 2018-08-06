@@ -6,18 +6,18 @@ const UserModel = require('../modules/UserModel');
 const userFindOne = require('./Find').userFindOne;
 
 // 插入数据
-let infoCreate = async (data, userId, faceRectangle) => {
-    dir(data, `插入数据信息`);
+let infoCreate = async (file, userId, faceRectangle) => {
+    dir(file, `插入数据信息`);
     log(4, `userId: ${userId}; faceRectangle: ${faceRectangle}`);
     
     return new Promise((resolve, reject) => { // 插入数据信息
         let createInfo = new UpFilesInfoModel({
             userId: userId, 
             upFileInfo: {
-                fileName: data.filename, 
-                filePath: data.path, 
-                fileWebURL: data.web_url, 
-                fileType: data.mimetype, 
+                fileName: file.filename, 
+                filePath: file.path, 
+                fileWebURL: file.web_url, 
+                fileType: file.mimetype, 
                 faceRectangle: faceRectangle.face_rectangle
             }
         });

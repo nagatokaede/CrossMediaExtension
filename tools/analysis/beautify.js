@@ -12,7 +12,7 @@ const ERRORMSG = require('../../debug/ERRORMSG');
 const reqBeautifyAPI = require('../../development_modules/face++/BeautifyAPI/reqBeautifyAPI');
 
 let detect = async (ctx, file) => {
-    let data = await reqBeautifyAPI(file.web_url);
+    let data = await reqBeautifyAPI(file.web_url + file.filename);
     if (!data) {
         ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message

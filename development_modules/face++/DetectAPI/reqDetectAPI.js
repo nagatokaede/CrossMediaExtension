@@ -7,14 +7,14 @@ const strToJson = require('../../../tools/typeConversion').strToJson;
 const querystring = require('querystring');
 const https = require('https');
 
-let reqDetectAPI = (path) => {
+let reqDetectAPI = (image_url) => {
     return new Promise((resolve, reject) => {
         // 设置 face++ 接口用户信息
         let faceInfoObj = new Object;
         faceInfoObj.api_key = faceInfo.api_key;
         faceInfoObj.api_secret = faceInfo.api_secret;
         faceInfoObj.return_landmark = faceInfo.return_landmark;
-        faceInfoObj.image_url = path
+        faceInfoObj.image_url = image_url
         
         // 拼接 face++ API 接口信息
         let postData = querystring.stringify(faceInfoObj);

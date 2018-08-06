@@ -13,13 +13,13 @@ const find = require('../../standar_modules/database/tools/Find').infoFindOne;
 const remove = require('../../standar_modules/database/tools/Remove').infoRemove;
 
 
-let createInfo = async (ctx, data, faceRectangle = false) => {
+let createInfo = async (ctx, file, faceRectangle = false) => {
     let userId = ctx.req.body.userId;
     if (faceRectangle) {
         let face_rectangle = faceRectangle[0].face_rectangle
     }
 
-    let Data = await create(data, userId, face_rectangle);
+    let Data = await create(file, userId, face_rectangle);
     if (!Data) {
         ctx.status = 500
         return ERRORMSG.SYSTEMERROR.message
