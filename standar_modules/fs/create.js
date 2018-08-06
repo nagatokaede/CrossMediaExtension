@@ -33,16 +33,17 @@ let createFiles =  (userId, type = 'images') => { // 创建文件夹
 
     return {
             "local_path": `${rootName}${dirName}\\`, 
-            "web_path": `http://${server.hostname}/${server.host}/${user}/${type}/${dirName}/`
+            "web_path": `http://${server.domain}:${server.post}/${user}/${type}/${dirName}/`
         } 
 }
 
 let createFile = (path, data, code = 'base64') => { // 写入文件
     log(4, `写入文件 path: ${path}; dataType: ${typeof data} code: ${code}`);
+    let Data;
     if (code == 'base64') {
-        let Data = new Buffer(data, 'base64');
+        Data = new Buffer(data, 'base64');
     } else {
-        let Data = data;
+        Data = data;
     }
 
     return new Promise(resolve => { 

@@ -20,14 +20,13 @@ let faceRectangleFun = fr => {
 
 let detect = async (ctx, detectMsg, templateMsg) => {
     dir(detectMsg, '用户上传图像的信息');
-    dir(templateMsg, '模板图像的信息');
 
     // 模板图像信息
-    let template_url = templateMsg.upFileInfo.fileWebURL
+    let template_url = templateMsg.upFileInfo.fileWebURL + templateMsg.upFileInfo.fileName
     let template_rectangle = faceRectangleFun(templateMsg.upFileInfo.faceRectangle);
 
     // 用户图像信息
-    let merge_url = detectMsg.upFileInfo.fileWebURL
+    let merge_url = detectMsg.upFileInfo.fileWebURL + detectMsg.upFileInfo.fileName
     let merge_rectangle = faceRectangleFun(detectMsg.upFileInfo.faceRectangle);
 
     // 人脸融合 API

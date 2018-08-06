@@ -19,7 +19,7 @@ const app = new koa();
 app.use(cors());
 
 // 静态资源目录对于相对入口文件server.js的路径
-const staticPath = ['../testfile', '../static'];
+const staticPath = ['../upfiles', '../static'];
 app.use(Static(
     Path.join(__dirname, staticPath[0])
 ));

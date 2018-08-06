@@ -36,4 +36,4 @@ let userUpdate = userId => {
 }
 
 
-module.exports = userUpdate
+exports.userUpdate = userUpdate

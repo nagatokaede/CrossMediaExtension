@@ -7,7 +7,8 @@ module.exports = {
     server: {
          //hostname: '192.168.1.3', 
          hostname: '10.0.0.156', 
-         post: '2233'
+         post: '2233',
+         domain: 'media.ominicloud.com'
     },
     // face++ API 接口信息
     faceInfo: {

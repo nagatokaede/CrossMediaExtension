@@ -1,8 +1,11 @@
 'use strict'
 
 const log = require('../../../debug/log').log;
+const dir = require('../../../debug/log').dir;
 
 const UserModel = require('../modules/UserModel');
+const InfoModel = require('../modules/InfoModel');
+
 const userFindOne = require('./Find').userFindOne;
 
 // 插入数据
@@ -11,14 +14,14 @@ let infoCreate = async (file, userId, faceRectangle) => {
     log(4, `userId: ${userId}; faceRectangle: ${faceRectangle}`);
     
     return new Promise((resolve, reject) => { // 插入数据信息
-        let createInfo = new UpFilesInfoModel({
+        let createInfo = new InfoModel({
             userId: userId, 
             upFileInfo: {
                 fileName: file.filename, 
                 filePath: file.path, 
                 fileWebURL: file.web_url, 
                 fileType: file.mimetype, 
-                faceRectangle: faceRectangle.face_rectangle
+                faceRectangle: faceRectangle
             }
         });
 
@@ -29,7 +32,7 @@ let infoCreate = async (file, userId, faceRectangle) => {
                 
             } else {
                 log(3, `上传图像信息保存成功！！`);
-                resolve(createInfo);
+                resolve(createInfo._doc);
             }
         });
     });

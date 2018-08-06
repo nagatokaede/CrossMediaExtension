@@ -1,6 +1,7 @@
 'use strict'
 
 const log = require('../debug/log').log;
+const dir = require('../debug/log').dir;
 
 const detect = require('./analysis/detect');
 const beautify = require('./analysis/beautify');
@@ -13,13 +14,13 @@ const multerData = require('./analysis/multerData');
 
 // ------------- 美颜 --------------
 
-let beautifyFun = async (file) => {
+let beautifyFun = async (ctx, file) => {
     // 图像美颜
     let data = await beautify(ctx, file);
     if (data.message) { return data }
 
     // 覆盖图像
-    return await writeFile.coverage(file, data);
+    return await writeFile.coverage(ctx, file, data);
 }
 
 // ------------- 融合 ----------------
@@ -50,8 +51,15 @@ let mergeFun = async (ctx, userInfoMsg, flag) => {
  */
 let upfileBase64 = async (ctx) => {
     // 存储上传图像
-    let file = await writeFile.upfile(ctx);
-    if (file.message) { return file }
+    let file;
+    if (ctx.req.body.dataBase64) { // 上传 base64 文件信息 
+        file = await writeFile.upfile(ctx);
+        if (file.message) { return file }
+
+    } else { // 上传数据流文件信息 
+        file = multerData(ctx);
+    }
+    dir(file, '文件本地存储信息');
 
     // 创建用户
     let userMsg = await user.createUser(ctx);
@@ -59,7 +67,7 @@ let upfileBase64 = async (ctx) => {
 
     // 美颜
     if (ctx.req.body.beautify == true) {
-        let beaut = await beautifyFun(file);
+        let beaut = await beautifyFun(ctx, file);
         if (beaut.message) { return beaut }
     }
 
@@ -79,14 +87,16 @@ let upfileBase64 = async (ctx) => {
  * beautify: beautify switch
  */
 let detectFun = async (ctx) => {
-    // 存储上传 base64 图像
+    // 存储上传图像
     let file;
-    if (ctx.req.body.beautify) {
+    if (ctx.req.body.dataBase64) { // 上传 base64 文件信息 
         file = await writeFile.upfile(ctx);
         if (file.message) { return file }
-    } else {
+
+    } else { // 上传数据流文件信息 
         file = multerData(ctx);
     }
+    dir(file, '文件本地存储信息');
 
     // 创建用户
     let userMsg = await user.createUser(ctx);
@@ -97,10 +107,15 @@ let detectFun = async (ctx) => {
     if (faceRectangle.message) { return faceRectangle }
 
     // 美颜
-    if (ctx.req.body.beautify == true) {
-        let beaut = await beautifyFun(file);
+    if (ctx.req.body.beautify == 'true') {
+        log(3, '图像美颜！');
+        let beaut = await beautifyFun(ctx, file);
         if (beaut.message) { return beaut }
     }
+
+    // 更新用户
+    let updateUser = await user.updateUser(ctx);
+    if (updateUser.message) { return updateUser }
 
     // 存储数据
     return await info.createInfo(ctx, file, faceRectangle);

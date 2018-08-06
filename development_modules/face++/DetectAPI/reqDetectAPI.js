@@ -55,6 +55,7 @@ let reqDetectAPI = (image_url) => {
                     resolve(undefined);
                     
                 } else { // 成功请求并返回人脸信息
+                    log(3, `成功请求并返回人脸信息!`);
                     resolve(dataObj.faces);
                 }
                 

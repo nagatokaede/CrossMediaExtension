@@ -13,7 +13,7 @@ const create = require('../../standar_modules/fs/create');
 
 let upfile = async ctx => { // 存储上传图像
     log(4, '开始写入上传文件！');
-    // 创建文件夹返回本地路径 local_path 和网络路径 web_url
+    // 创建文件夹返回本地路径 local_path 和网络路径 web_path
     let files = create.createFiles(ctx.req.body.userId);
 
     // 处理上传文件 base64 数据
@@ -33,13 +33,13 @@ let upfile = async ctx => { // 存储上传图像
     return {
         "filename": base, 
         "path": path,
-        "web_url": files.web_url,
+        "web_url": files.web_path,
         "mimetype": "image/jpeg"
     }
 }
 
 
-let coverage = async (file, data) => { // 美颜图像覆盖
+let coverage = async (ctx, file, data) => { // 美颜图像覆盖
     let File = await create.createFile(file.path + file.filename, data.result);
     if (!File) {
         ctx.status = 500

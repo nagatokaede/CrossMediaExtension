@@ -1,5 +1,8 @@
 'use strict'
 
+const log = require('../../debug/log').log;
+const dir = require('../../debug/log').dir;
+
 const fs = require('fs');
 
 // 判断文件是否已存在
@@ -14,17 +17,19 @@ let exist = (userInfoMsg, ctx) => {
 
     let MergeImagePath = userInfoMsg.upFileInfo.filePath + base
 
-    if (!fs.accessSync(MergeImagePath)) { // 如果融合文件已存在
+    try {
+        fs.accessSync(MergeImagePath, fs.constants.R_OK | fs.constants.W_OK);
         log(3, '融合图像已存在！');
         return {
             "mergeId": userInfoMsg._id,
-            "filename": fileName, 
+            "filename": base, 
             "web_url": userInfoMsg.upFileInfo.fileWebURL,
             "mimetype": "image/jpeg"
         }
+    } catch {
+        return false
     }
-
-    return false
+    
 }
 
 module.exports = exist

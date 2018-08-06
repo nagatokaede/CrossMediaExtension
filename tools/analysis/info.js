@@ -15,8 +15,10 @@ const remove = require('../../standar_modules/database/tools/Remove').infoRemove
 
 let createInfo = async (ctx, file, faceRectangle = false) => {
     let userId = ctx.req.body.userId;
+
+    let face_rectangle = false;
     if (faceRectangle) {
-        let face_rectangle = faceRectangle[0].face_rectangle
+        face_rectangle = faceRectangle[0].face_rectangle
     }
 
     let Data = await create(file, userId, face_rectangle);
