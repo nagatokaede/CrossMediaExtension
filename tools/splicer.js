@@ -16,7 +16,7 @@ const multerData = require('./analysis/multerData');
 let beautifyFun = async (file) => {
     // 图像美颜
     let data = await beautify(file);
-    if (data.message) { return data }
+    if (data.msg) { return data }
 
     // 覆盖图像
     return await writeFile.coverage(path, data);
@@ -27,7 +27,7 @@ let beautifyFun = async (file) => {
 let mergeFun = async (ctx, userInfoMsg, flag) => {
     // 查询模板
     let templateMsg = await info.findInfo(ctx);
-    if (templateMsg.message) { return templateMsg } 
+    if (templateMsg.msg) { return templateMsg } 
 
     // 判断文件是否已存在
     if (flag) {
@@ -37,7 +37,7 @@ let mergeFun = async (ctx, userInfoMsg, flag) => {
 
     // 人脸融合
     let mergeMsg = await mergeFace(userInfoMsg, templateMsg);
-    if (mergeMsg.message) { return mergeMsg }
+    if (mergeMsg.msg) { return mergeMsg }
 
     // 存储图像
     return await writeFile.saveMergeFile(mergeMsg, userInfoMsg, templateMsg);
@@ -51,21 +51,21 @@ let mergeFun = async (ctx, userInfoMsg, flag) => {
 let upfileBase64 = async (ctx) => {
     // 存储上传图像
     let file = await writeFile.upfile(ctx);
-    if (file.message) { return file }
+    if (file.msg) { return file }
 
     // 创建用户
     let userMsg = await user.createUser(ctx);
-    if (userMsg.message) { return userMsg }
+    if (userMsg.msg) { return userMsg }
 
     // 美颜
     if (ctx.req.body.beautify == true) {
         let beaut = await beautifyFun(file);
-        if (beaut.message) { return beaut }
+        if (beaut.msg) { return beaut }
     }
 
     // 存储数据
     let data = await info.createInfo(ctx, file);
-    if (data.message) { return data }
+    if (data.msg) { return data }
 
     return data.upFileInfo.fileWebURL + data.upFileInfo.fileName
 }
@@ -82,23 +82,23 @@ let detectFun = async (ctx) => {
     // 存储上传 base64 图像
     if (ctx.req.body.beautify) {
         let file = await writeFile.upfile(ctx);
-        if (file.message) { return file }
+        if (file.msg) { return file }
     } else {
         let file = multerData(ctx);
     }
 
     // 创建用户
     let userMsg = await user.createUser(ctx);
-    if (userMsg.message) { return userMsg }
+    if (userMsg.msg) { return userMsg }
 
     // 人脸识别
     let faceRectangle = await detect(file);
-    if (faceRectangle.message) { return faceRectangle }
+    if (faceRectangle.msg) { return faceRectangle }
 
     // 美颜
     if (ctx.req.body.beautify == true) {
         let beaut = await beautifyFun(file);
-        if (beaut.message) { return beaut }
+        if (beaut.msg) { return beaut }
     }
 
     // 存储数据
@@ -114,7 +114,7 @@ let detectFun = async (ctx) => {
 let mergeFaceFun = async (ctx) => {
     // 人脸识别
     let detectMsg = await detectFun(ctx);
-    if (detectMsg.message) { return detectMsg }
+    if (detectMsg.msg) { return detectMsg }
 
     // 人脸融合
     return mergeFun(ctx, detectMsg, false);
@@ -128,7 +128,7 @@ let mergeFaceFun = async (ctx) => {
 let changeTemplateFun = async (ctx) => {
     // 查询用户图像信息
     let userInfoMsg = await info.findInfo(ctx, false);
-    if (userInfoMsg.message) { return userInfoMsg } 
+    if (userInfoMsg.msg) { return userInfoMsg } 
 
     // 人脸融合
     return mergeFun(ctx, userInfoMsg, true);
